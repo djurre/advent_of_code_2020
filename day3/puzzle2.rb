@@ -2,8 +2,8 @@
 @x_length = @input.first.size
 
 def calculate(step_x, step_y)
-  @input.each_slice(step_y).with_index.map do |lines, index|
-    lines.first[(index * step_x) % @x_length]
+  @input.each_slice(step_y).map(&:first).each_with_index.map do |line, index|
+    line[(index * step_x) % @x_length]
   end.count('#')
 end
 
