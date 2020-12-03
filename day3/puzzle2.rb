@@ -9,3 +9,8 @@ end
 
 steps = [[1, 1], [3, 1], [5, 1], [7, 1], [1, 2]]
 puts steps.map { |step| calculate(step[0], step[1]) }.inject(:*)
+
+
+
+# Or as a one-liner:
+puts [[1, 1], [3, 1], [5, 1], [7, 1], [1, 2]].map{ |x, y| @input.each_slice(y).map(&:first).each_with_index.map {|line, index| line[(index * x) % @input.first.size] }.count('#')  }.inject(:*)
