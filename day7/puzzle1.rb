@@ -1,7 +1,7 @@
-@input = File.readlines("input.txt", chomp: true)
+@input = File.readlines("input.txt")
 
 def find(color)
-  bags = @input.map{|l| l.match(/^(.*) bags+ contain.*#{Regexp.quote(color)}/)&.captures }.compact.flatten
+  bags = @input.filter_map{|l| l.match(/^(.*) bags+ contain.*#{Regexp.quote(color)}/)&.captures }.flatten
   bags + bags.map{|l| find(l)}
 end
 
