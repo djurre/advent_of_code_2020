@@ -20,21 +20,12 @@ class Puzzle
   end
 
   def neighbour(i, j, i_dir, j_dir)
-    found = FLOOR
     while true
       i += i_dir
       j += j_dir
-      if i < 0 || i >= seats.size || j < 0 || j >= seats.first.size
-        break
-      end
-
-      if seats[i][j] == OCC || seats[i][j] == EMPTY
-        found = seats[i][j]
-        break
-      end
+      break if i < 0 || i >= seats.size || j < 0 || j >= seats.first.size
+      return seats[i][j] if seats[i][j] == OCC || seats[i][j] == EMPTY
     end
-
-    found
   end
 
   def neighbours(i, j)
