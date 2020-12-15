@@ -16,16 +16,12 @@ end
 
 def write_to_mem(address, value)
   num_floating = address.count("X")
-  if num_floating == 0
-    @mem[address.to_i(2)] = value
-    return
-  end
+  return @mem[address.to_i(2)] = value if num_floating == 0
 
-  (0..2 ** num_floating - 1).each do |i|
-    sub_mask = "%0#{num_floating}b" % i
+  [0, 1].repeated_permutation(num_floating).each do |sub_mask|
     final_address = address
-    num_floating.times do |j|
-      final_address = final_address.sub("X", sub_mask[j])
+    num_floating.times do |index|
+      final_address = final_address.sub("X", sub_mask[index].to_s)
     end
 
     @mem[final_address.to_i(2)] = value
@@ -42,6 +38,5 @@ input.slice_before { |l| l.include?("mask") }.map do |m|
     write_to_mem(new_address, value)
   end
 end
-
 
 pp @mem.values.sum { |v| v.to_i }

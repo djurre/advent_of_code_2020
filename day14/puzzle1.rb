@@ -2,8 +2,8 @@ input = File.readlines("input.txt", chomp: true)
 
 mem = {}
 
-input.slice_before { |l| l.include?("mask") }.map do |m|
-  mask = m[0].split("mask = ")[1]
+input.slice_before { |l| l.include?("mask") }.each do |m|
+  mask = m[0].sub("mask = ", '')
   instructions = m[1..-1].map { |i| i.match(/mem\[(\d+)\] = (\d+)/).captures }
 
   instructions.each do |address, value|
