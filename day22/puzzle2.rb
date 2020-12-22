@@ -6,6 +6,7 @@ def play_game(deck1, deck2)
 
   until deck1.empty? || deck2.empty? do
     return :player1 if rounds.include?([deck1, deck2])
+    return :player1 if deck1.max > deck2.max && deck1.max > (deck1 + deck2).count
 
     rounds.add([deck1.dup, deck2.dup])
     c1 = deck1.shift
